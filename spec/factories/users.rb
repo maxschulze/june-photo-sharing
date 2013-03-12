@@ -9,5 +9,12 @@ FactoryGirl.define do
     email
     password              'test123456'
     password_confirmation 'test123456'
+
+    trait :admin do
+      role 'admin'
+    end
+
+    factory :admin_user,    traits: [:admin]
   end
+
 end
