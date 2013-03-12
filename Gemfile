@@ -27,6 +27,7 @@ end
 gem 'jquery-rails'
 
 group :test, :development, :cucumber do
+  gem 'rspec-rails'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false
   gem 'launchy'
