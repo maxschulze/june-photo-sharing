@@ -9,3 +9,17 @@ end
 When(/^I go to the start page$/) do
   visit('/')
 end
+
+When(/^I click on "(.*?)" in the main navigation$/) do |link|
+  within('nav#main') do
+    click_link link
+  end
+end
+
+Then(/^I should be on the people overview page$/) do
+  page.should have_content("People")
+end
+
+When(/^I click on "(.*?)"$/) do |link|
+  click_link link
+end
