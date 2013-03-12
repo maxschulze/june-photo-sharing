@@ -60,3 +60,5 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 World(FactoryGirl::Syntax::Methods)
+
+VALID_PASSWORD = 'cucumber123'
