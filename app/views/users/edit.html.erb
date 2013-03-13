@@ -1,0 +1,14 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h1><%= t('users.edit.title') %></h1>
+    
+    <%= simple_form_for @user do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :email %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+</div>
