@@ -1,11 +1,26 @@
-<h2><%= t 'devise.invitations.edit.header' %></h2>
+<div class="row-fluid">
+  <div class="span2">
+    <%= render "devise/shared/links" %>
+  </div>
 
-<%= simple_form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => { :method => :put } do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :invitation_token %>
+  <div class="span10">
+    <h1><%= t 'devise.invitations.edit.header', :name => resource.full_name %></h1>
 
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+    <p class="lead"><%= t('devise.invitations.edit.intro') %></p>
+    
+    <%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), 
+                        html: { :method => :put, :class => 'form-horizontal' }) do |f| %>
+      <%= devise_error_messages! %>
 
-  <%= f.submit t("devise.invitations.edit.submit_button") %>
-<% end %>
+      <%= field_set_tag do %>
+        <%= f.hidden_field :invitation_token %>
+
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+
+        <%= f.button :submit, t('devise.invitations.edit.submit_button') %>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>

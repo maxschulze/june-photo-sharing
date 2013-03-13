@@ -11,7 +11,7 @@ Feature: Inviting new users
     When I click on "Add person"
     Then I should see the invite form
     When I enter the information of the person that I want to invite
-      And I click on the "Send an invitation" button
+      And I click the "Send an invitation" button
     Then I should see the invitation success message
      And the person should have received an invitation email
 
@@ -21,6 +21,6 @@ Feature: Inviting new users
     Then I should be on the registration page
       And I should be personally greeted
     When I pick and fill in a valid password
-      And I click on "Save"
+      And I click the "Set my password" button
     Then I should be on the start page
-      And I should see "June says Hello, Guten Tag and Welcome!"
+      And I should see "Your password was set successfully. You are now signed in."
