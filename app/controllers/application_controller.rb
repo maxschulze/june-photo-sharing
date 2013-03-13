@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   
   def authenticate_inviter!
     if can?(:manage, User)
-      true
+      current_user
     else
       raise CanCan::AccessDenied.new("You don't have permission to send invites.")
     end
