@@ -5,11 +5,11 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  
+
   <nav class="navbar navbar-static-top" id="main">
     <div class="navbar-inner">
       <div class="container">
@@ -18,35 +18,36 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        
+
         <a class="brand" href="/">June's Photos</a>
-        
+
         <ul class="nav">
           <% if user_signed_in? %>
             <%= nav_link 'Home', url: root_path, controller: 'home' %>
             <%= nav_link 'People', url: users_path, controller: 'users' if can? :manage, User %>
+            <%= nav_link 'Sign out', url: destroy_user_session_path, method: :delete %>
           <% else %>
             <%= nav_link 'Sign in', url: new_user_session_path, controller: 'sessions' %>
           <% end %>
         </ul>
-        
+
         <!-- Everything you want hidden at 940px or less, place within here -->
         <div class="nav-collapse collapse">
-          
+
         </div>
       </div>
     </div>
   </nav>
-  
+
   <div class="container-fluid">
-    
+
     <div class="row-fluid">
       <div class="span12">
         <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
         <% if alert %><div class="alert alert-error"><%= alert %></div><% end %>
       </div>
     </div>
-    
+
     <%= yield %>
   </div>
 
