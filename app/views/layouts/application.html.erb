@@ -3,8 +3,13 @@
 <head>
   <title>June's Photos</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag 'jquery.fileupload-ui.css' %>
+  <noscript><%= stylesheet_link_tag 'jquery.fileupload-ui-noscript.css' %></noscript>
+
+  <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -50,6 +55,8 @@
 
     <%= yield %>
   </div>
+
+  <%= javascript_include_tag "application" %>
 
 </body>
 </html>
