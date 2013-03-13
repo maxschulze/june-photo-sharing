@@ -2,4 +2,21 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+
+  users:
+    sign_in:
+      title: 'Sign in'
+      intro: 'Please sign in to access this page.'
+      submit: 'Sign in'
+    sign_up:
+      title: 'Sign up'
+      intro: 'Please pick a password to sign up.'
+      submit: 'Sign up'
+    forgot_password:
+      title: "Forgot your password?"
+      intro: "Fill in your email to receive instructions on how to reset your password."
+      submit: "Send me reset password instructions"      
+    unlock:
+      title: "Resend the unlock instructions?"
+      intro: "Fill in your email to receive instructions on how to unlock your account again."
+      submit: "Resend unlock instructions"
