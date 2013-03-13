@@ -1,3 +1,5 @@
+INVITE_EMAIL = "june@schulze.com"
+
 Given(/^I am signed in as an admin$/) do
   @admin = create(:admin_user, :password => VALID_PASSWORD, :password_confirmation => VALID_PASSWORD)
   visit('/users/sign_in')
@@ -24,6 +26,11 @@ When(/^I click on "(.*?)"$/) do |link|
   click_link link
 end
 
+When(/^I click the "(.*?)" button$/) do |link|
+  click_button link
+end
+
+
 Then(/^I should see the invite form$/) do
   page.should have_css('form.simple_form.new_user')
 end
@@ -31,16 +38,19 @@ end
 When(/^I enter the information of the person that I want to invite$/) do
   fill_in 'user_first_name', with: "June"
   fill_in 'user_last_name', with: "Schulze"
-  fill_in 'user_email', with: "june@schulze.com"
-  click_button 'Send an invitation'
+  fill_in 'user_email', with: INVITE_EMAIL
 end
 
 Then(/^I should see "(.*?)"$/) do |content|
   page.should have_content(content)
 end
 
+Then(/^I should see the invitation success message/) do
+  step %{I should see "An invitation email has been sent to #{INVITE_EMAIL}."}
+end
+
 Then(/^the person should have received an invitation email$/) do
-  step %{"#{"june@schulze.com"}" should receive an email}
+  step %{"#{INVITE_EMAIL}" should receive an email}
 end
 
 Given(/^I have received an invite$/) do
