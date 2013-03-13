@@ -26,3 +26,6 @@ en:
       add_person: 'Add person'
       edit: Edit
       delete: Delete
+      
+    edit: 
+      title: Edit user
