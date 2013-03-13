@@ -11,8 +11,8 @@ Feature: Inviting new users
     When I click on "Add person"
     Then I should see the invite form
     When I enter the information of the person that I want to invite
-      And I click on "Invite"
-    Then I should see "Success! The person has received an invite now."
+      And I click on the "Send an invitation" button
+    Then I should see the invitation success message
      And the person should have received an invitation email
 
   Scenario: As an invited person I want to be able to accept the invite
