@@ -62,3 +62,6 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 World(FactoryGirl::Syntax::Methods)
 
 VALID_PASSWORD = 'cucumber123'
+
+require 'email_spec' # add this line if you use spork
+require 'email_spec/cucumber'

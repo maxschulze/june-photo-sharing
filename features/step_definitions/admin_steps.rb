@@ -23,3 +23,46 @@ end
 When(/^I click on "(.*?)"$/) do |link|
   click_link link
 end
+
+Then(/^I should see the invite form$/) do
+  page.should have_css('form.simple_form.new_user')
+end
+
+When(/^I enter the information of the person that I want to invite$/) do
+  fill_in 'user_first_name', with: "June"
+  fill_in 'user_last_name', with: "Schulze"
+  fill_in 'user_email', with: "june@schulze.com"
+  click_button 'Send an invitation'
+end
+
+Then(/^I should see "(.*?)"$/) do |content|
+  page.should have_content(content)
+end
+
+Then(/^the person should have received an invitation email$/) do
+  step %{"#{"june@schulze.com"}" should receive an email}
+end
+
+Given(/^I have received an invite$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I click the invitation link in the email$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should be on the registration page$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should be personally greeted$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I pick and fill in a valid password$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should be on the start page$/) do
+  pending # express the regexp above with the code you wish you had
+end
