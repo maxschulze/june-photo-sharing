@@ -1,0 +1,28 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= user.email %></td>
+  <td><%= l user.last_sign_in_at %></td>
+  <td>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        Action
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="userAction">
+        <li>
+          <%= link_to edit_user_path(user) do %>
+            <i class="icon-edit"></i>
+            <%= t('users.admin.edit') %>
+          <% end %>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <%= link_to user_path(user), method: :delete, confirm: t('confirm') do %>
+            <i class="icon-remove"></i>
+            <%= t('users.admin.delete') %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </td>
+</tr>

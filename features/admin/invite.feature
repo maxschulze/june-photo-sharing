@@ -8,7 +8,7 @@ Feature: Inviting new users
     When I go to the start page
       And I click on "people" in the main navigation
     Then I should be on the people overview page
-    When I click on "add person"
+    When I click on "Add person"
     Then I should see the invite form
     When I enter the information of the person that I want to invite
       And I click on "Invite"
