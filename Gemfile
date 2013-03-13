@@ -10,6 +10,7 @@ gem 'mysql2'
 
 # Auth
 gem 'devise'
+gem 'devise_invitable', '~> 1.1.0'
 gem 'cancan'
 
 # Gems used only for assets and not required
