@@ -12,7 +12,7 @@ end
 
 When(/^I click on "(.*?)" in the main navigation$/) do |link|
   within('nav#main') do
-    click_link link
+    click_link link.titleize
   end
 end
 
