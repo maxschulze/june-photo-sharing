@@ -22,5 +22,4 @@ Feature: Manage users
   Scenario: Delete a user
     When I click on delete for the first person
       And I press ok in the confirmation message
-    Then I should be on the manage people page
-      And the person should be deleted
+    Then the person should be deleted
