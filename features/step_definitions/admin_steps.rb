@@ -96,7 +96,7 @@ end
 
 When(/^I click on edit for the first person$/) do
   step %{I open the action dropdown for a user}
-  page.all('table.table tbody tr')[1].click_link('Edit')
+  page.first('table.table tbody tr').click_link('Edit')
 end
 
 Then(/^I should be on the edit page$/) do
@@ -108,7 +108,6 @@ When(/^I change the first name$/) do
 end
 
 Then(/^I should be on the manage people page$/) do
-  save_and_open_page
   page.should have_css('table.table')
 end
 
@@ -117,15 +116,15 @@ Then(/^I should see the new first name$/) do
 end
 
 When(/^I open the action dropdown for a user$/) do
-  page.all('table.table tbody tr')[1].click_link('Action')
+  page.first('table.table tbody tr').click_link('Action')
 end
 
 When(/^I click on delete for the first person$/) do
-  step %{I open the action dropdown for a user}
-  element = page.all('table.table tbody tr')[1]
-  element.click_link('Delete')
-
   @user_count = User.count
+  
+  step %{I open the action dropdown for a user}
+  element = page.first('table.table tbody tr')
+  element.click_link('Delete')
 end
 
 When(/^I press ok in the confirmation message$/) do
