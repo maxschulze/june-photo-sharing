@@ -76,4 +76,6 @@ JunePhotoSharing::Application.configure do
       :authentication => :plain
   }
   config.action_mailer.delivery_method = :smtp
+  
+  config.action_mailer.default_url_options = { :host => 'june-photo-sharing.herokuapp.com' }
 end
