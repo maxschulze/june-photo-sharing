@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 group :production, :staging, :development do
   gem 'mysql2'
+  gem 'thin'
 end
 
 # Auth
@@ -65,6 +66,5 @@ group :test, :development do
 end
 
 group :development do
-  gem 'thin'
   gem 'quiet_assets'
 end
