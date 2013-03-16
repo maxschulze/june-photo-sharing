@@ -7,6 +7,7 @@ gem 'rails', '3.2.12'
 
 group :production, :staging, :development do
   gem 'mysql2'
+  gem 'activerecord-mysql-adapter'
 end
 
 # Auth
