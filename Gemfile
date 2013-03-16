@@ -35,11 +35,11 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
-group :test, :cucumber do
+group :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
-group :test, :development, :cucumber do
+group :test, :development do
   gem 'rspec-rails'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false
