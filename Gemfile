@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'carrierwave'
 gem 'mini_magick'
-gem "fog", "~> 1.3.1"
+gem "fog"
 
 gem 'newrelic_rpm'
 
@@ -38,6 +38,7 @@ end
 
 group :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'webmock'
 end
 
 group :test, :development do
@@ -61,7 +62,6 @@ group :test, :development do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'resque_spec'
-  gem 'webmock'
   gem 'capybara'
 end
 
