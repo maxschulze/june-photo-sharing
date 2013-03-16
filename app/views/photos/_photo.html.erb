@@ -1,0 +1,15 @@
+<li class="span2">
+  <%= link_to photo, class: 'thumbnail' do %>
+    <img src="<%= photo.image.thumb.url %>"/>
+  <% end %>
+
+  <% if photo.title.present? %>
+    <h3><%= photo.title %></h3>
+  <% end %>
+
+  <% if photo.description.present? %>
+    <p>
+      <%= photo.description %>
+    </p>
+  <% end %>
+</li>

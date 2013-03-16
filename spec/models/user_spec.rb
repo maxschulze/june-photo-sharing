@@ -6,7 +6,7 @@ describe User do
   end
 
   describe "Associations" do
-    # it { should have_and_belong_to_many(:stores) }
+    it { should have_many(:photos) }
   end
 
   describe "Validations" do

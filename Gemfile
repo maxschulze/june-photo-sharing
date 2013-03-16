@@ -5,13 +5,17 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'mysql2'
 
 # Auth
 gem 'devise'
 gem 'devise_invitable', '~> 1.1.0'
 gem 'cancan'
+
+gem 'jquery-rails'
+gem 'simple_form'
+gem 'carrierwave'
+gem 'mini_magick'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -26,10 +30,8 @@ group :assets do
   gem 'bootstrap-sass'
 end
 
-gem 'jquery-rails'
-gem 'simple_form'
-
 group :test, :development, :cucumber do
+  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'cucumber'
   gem 'cucumber-rails', :require => false

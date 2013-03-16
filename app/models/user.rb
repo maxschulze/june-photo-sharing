@@ -8,11 +8,12 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :first_name, :last_name
-  
+
   has_many :invitations, :class_name => self.to_s, :as => :invited_by
-  
+  has_many :photos
+
   validates :first_name, :last_name, :presence => true
-  
+
   def full_name
     [first_name, last_name].join(" ")
   end
