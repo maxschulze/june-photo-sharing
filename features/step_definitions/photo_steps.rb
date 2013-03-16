@@ -3,7 +3,7 @@ Given(/^I am on the start page$/) do
 end
 
 Then(/^I should see the upload photo form$/) do
-  page.should have_css('form.new_photo')
+  page.should have_css('form#fileupload')
 end
 
 When(/^I attach a valid photo file$/) do

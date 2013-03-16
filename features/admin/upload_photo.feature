@@ -11,7 +11,5 @@ Feature: Upload photos
     When I click on "Upload photo"
     Then I should see the upload photo form
     When I attach a valid photo file
-      And I enter valid photo meta data
-      And I click the "Create Photo" button
-    Then I should be on the start page
-      And I should see "Photo has been uploaded!"
+      And I click the "Start upload" button
+    Then I should see the uploads
