@@ -5,5 +5,7 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  scope :overview, order('created_at desc')
+  scope :overview,  order('id desc')
+  scope :previous,  lambda {|current| where('id > ?', current.id) }
+  scope :next,      lambda {|current| where('id < ?', current.id) }
 end

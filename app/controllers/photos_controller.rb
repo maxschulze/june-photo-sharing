@@ -3,6 +3,8 @@ class PhotosController < ApplicationController
   load_and_authorize_resource
 
   def show
+    @prev = Photo.overview.previous(@photo).first
+    @next = Photo.overview.next(@photo).first
   end
 
   def new
