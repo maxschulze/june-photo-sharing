@@ -6,6 +6,7 @@ class Ability
     when 'admin'
       can :manage, :all
     else
+      can :read, Photo
     end
   end
 end

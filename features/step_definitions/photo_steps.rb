@@ -15,3 +15,45 @@ Then(/^I should see the uploads$/) do
   page.should have_css('.thumbnails li a img')
   all('.thumbnails li a img').count.should == 1
 end
+
+Given(/^(\d+) photos exist$/) do |count|
+  @photos = []
+  count.to_i.times do
+    @photos << create(:photo)
+  end
+end
+
+Then(/^I should see an overview of photos$/) do
+  page.should have_css('ul.thumbnails li')
+  all('ul.thumbnails li').length.should == @photos.count
+end
+
+When(/^I click on the first photo$/) do
+  all('ul.thumbnails li a').first.click
+end
+
+Then(/^I should see a larger version of the photo$/) do
+  page.should have_css('img.photo')
+end
+
+Given(/^I see (\d+) picture per page on the overview$/) do |amount|
+  @params = { :per_page => amount }
+end
+
+Then(/^I should see the first photo$/) do
+  @photos = Photo.overview.all
+  page.should have_css("ul.thumbnails li[data-photo-id=\"#{@photos.first.id}\"]")
+end
+
+Then(/^I should see the pagination$/) do
+  page.should have_css('nav.pagination')
+end
+
+When(/^I select the second page$/) do
+  all('nav.pagination li a[rel="next"]').first.click
+end
+
+Then(/^I should see the second photo$/) do
+  @photos = Photo.overview.all
+  page.should have_css("ul.thumbnails li[data-photo-id=\"#{@photos.second.id}\"]")
+end

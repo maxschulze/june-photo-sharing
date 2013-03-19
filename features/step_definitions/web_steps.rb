@@ -11,7 +11,7 @@ Then(/^I should see "(.*?)"$/) do |content|
 end
 
 When(/^I go to the start page$/) do
-  visit('/')
+  visit("/?#{(@params || {}).to_query}")
 end
 
 Then(/^I should be on the start page$/) do

@@ -5,5 +5,4 @@ $(document).ready ->
   #xhrFields: {withCredentials: true},
   $("#fileupload").fileupload 
     url: "/photos/upload"
-    maxFileSize: 5000000
     acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
