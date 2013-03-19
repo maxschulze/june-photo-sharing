@@ -4,4 +4,6 @@ class Photo < ActiveRecord::Base
   belongs_to :user
 
   mount_uploader :image, ImageUploader
+  
+  scope :overview, order('created_at desc')
 end
