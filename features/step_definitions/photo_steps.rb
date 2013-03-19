@@ -7,9 +7,11 @@ Then(/^I should see the upload photo form$/) do
 end
 
 When(/^I attach a valid photo file$/) do
-  pending # express the regexp above with the code you wish you had
+  attach_file("files[]", Rails.root.join('spec/fixtures/test.jpg'))
 end
 
-When(/^I enter valid photo meta data$/) do
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see the uploads$/) do
+  visit('/')
+  page.should have_css('.thumbnails li a img')
+  all('.thumbnails li a img').count.should == 1
 end
