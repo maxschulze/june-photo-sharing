@@ -15,7 +15,7 @@ describe PhotosController do
 
   end
   
-  describe "GET /photos/show" do
+  describe "GET /photos/:id" do
     
     it "should respond with the matching photo" do
       @photo = create(:photo)
@@ -37,6 +37,22 @@ describe PhotosController do
       assigns[:next].id.should == @photos.last.id
     end
     
+  end
+  
+  describe "DELETE /photos/:id" do
+    it "should delete a photo" do
+      @photo = create :photo
+      delete :destroy, :id => @photo.to_param
+      
+      Photo.count.should == 0
+      
+      response.should redirect_to(root_path)
+    end
+    
+    it "should return a 404 if the photo was not found" do
+      delete :destroy, :id => 'does-not-exist'
+      response.code.should == 404
+    end
   end
 
 end

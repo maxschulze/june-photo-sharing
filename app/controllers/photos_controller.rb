@@ -29,4 +29,12 @@ class PhotosController < ApplicationController
 
     render json: { :files => @response }
   end
+  
+  def destroy
+    if @photo.present? and @photo.destroy
+      redirect_to root_path
+    else
+      head 404
+    end
+  end
 end
