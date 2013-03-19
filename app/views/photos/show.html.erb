@@ -1,3 +1,11 @@
+<% if can? :delete, Photo %>
+	<div class="row-fluid">
+		<div class="span12">
+			<%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
+		</div>
+	</div>
+<% end %>
+
 <div class="row-fluid">
 	<div class="span12" style="text-align: center">
 		<%= link_to @prev do %>
