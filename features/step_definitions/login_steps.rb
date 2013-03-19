@@ -1,6 +1,6 @@
 VALID_PASSWORD = 'cucumber123'
 
-Given(/^I am signed in as an ([a-z]+)$/) do |type|
+Given(/^I am signed in as (a|an) ([a-z]+)$/) do |amount, type|
   user_type = if type == 'admin'
     :admin_user
   else
