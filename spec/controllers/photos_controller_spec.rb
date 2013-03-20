@@ -26,11 +26,11 @@ describe PhotosController do
     end
     
     it "should define the next and prev photo" do
-      3.times { create(:photo) }
+      3.times {|i| create(:photo, taken_at: i.days.ago) }
       @photos = Photo.overview.all
       
       get :show, :id => @photos.second.to_param
-      
+      pp @photos
       response.should be_success
       
       assigns[:prev].id.should == @photos.first.id
@@ -50,8 +50,9 @@ describe PhotosController do
     end
     
     it "should return a 404 if the photo was not found" do
-      delete :destroy, :id => 'does-not-exist'
-      response.code.should == 404
+      lambda {
+        delete :destroy, :id => 'does-not-exist'
+      }.should raise_error(ActiveRecord::RecordNotFound)
     end
   end
 
