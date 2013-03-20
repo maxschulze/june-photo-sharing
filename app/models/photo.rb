@@ -16,10 +16,12 @@ class Photo < ActiveRecord::Base
   private
   
   def extract_taken_at
-    exif_file = EXIFR::JPEG.new(image.file.path) rescue nil
+    exif_file = EXIFR::JPEG.new(image.file.path)
     
     if exif_file.present? and exif_file.exif?
       self.taken_at = exif_file.date_time
+    else
+      self.taken_at = DateTime.now
     end
   end
   
