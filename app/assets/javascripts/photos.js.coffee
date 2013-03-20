@@ -5,7 +5,7 @@ $(document).ready ->
   #xhrFields: {withCredentials: true},
   $("#fileupload").fileupload 
     url: "/photos/upload"
-    acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+    acceptFileTypes: /(\.|\/)(jpe?g)$/i
 		
 	###
 	Adds 0 left margin to the first thumbnail on each row that don't get it via CSS rules.
