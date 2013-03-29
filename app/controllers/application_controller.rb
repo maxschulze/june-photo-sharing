@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def switch_heroku
-    if request.url ~= /heroku/
+    if request.url =~ /heroku/
       redirect_to "http://server.maxschulze.com#{request.path}"
       return
     end
