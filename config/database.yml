@@ -26,7 +26,7 @@ production:
   database: june_photo_sharing_production
   host: localhost
   username: root
-  password: 
+  password: qS2w7WCIhvLUeTFP
   pool: 5
   timeout: 5000
 
