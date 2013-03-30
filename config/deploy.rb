@@ -12,7 +12,7 @@ role :db,  "server.maxschulze.com", :primary => true # This is where Rails migra
 
 # if you want to clean up old releases on each deploy uncomment this:
 after "deploy:restart", "deploy:cleanup"
-
+after "deploy:create_symlink", "deploy:symlink_uploads"
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
 
@@ -24,5 +24,10 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  task :symlink_uploads do
+    run "mkdir -p #{deploy_to}/shared/uploads"
+    run "ln -nfs  #{deploy_to}/shared/uploads #{deploy_to}/current/public/uploads"
   end
 end
