@@ -1,4 +1,9 @@
 en:
+  helpers:
+    submit:
+      photo:
+        update: "Save"
+  
   simple_form:
     "yes": 'Yes'
     "no": 'No'
@@ -11,7 +16,9 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     # Labels and hints examples
-    # labels:
+    labels:
+      photo:
+        taken_at: 'When was the photo taken?'
     #   defaults:
     #     password: 'Password'
     #   user:

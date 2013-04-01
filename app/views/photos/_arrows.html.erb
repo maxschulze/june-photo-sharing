@@ -1,0 +1,9 @@
+<%= link_to @prev do %>
+			<i class="icon-arrow-left"></i>
+			Previous
+		<% end if @prev.present? %>
+		
+		<%= link_to @next do %>
+			Next
+			<i class="icon-arrow-right"></i>
+		<% end if @next.present? %>

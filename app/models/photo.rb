@@ -1,5 +1,5 @@
 class Photo < ActiveRecord::Base
-  attr_accessible :description, :title, :user_id, :image
+  attr_accessible :description, :title, :user_id, :image, :taken_at
 
   belongs_to :user
 
