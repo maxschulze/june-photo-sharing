@@ -12,7 +12,7 @@ class PhotosController < ApplicationController
   
   def update
     if @photo.update_attributes(params[:photo])
-      redirect_to(@photo)
+      redirect_to(@photo, :notice => "Photo has been saved successfully.")
     else
       render :action => "show"
     end
