@@ -18,10 +18,8 @@ class Photo < ActiveRecord::Base
   def extract_taken_at
     return if self.taken_at.present?
     
-    exif_file = EXIFR::JPEG.new(image.file.path)
-    
-    if exif_file.present? and exif_file.exif?
-      self.taken_at = exif_file.date_time
+    if date_taken = image.get_exif("DateTimeOriginal")
+      self.taken_at = date_taken
     else
       self.taken_at = DateTime.now
     end
