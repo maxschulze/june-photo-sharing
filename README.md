@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/maxschulze/june-photo-sharing.png?branch=master)](https://travis-ci.org/maxschulze/june-photo-sharing)
