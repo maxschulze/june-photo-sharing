@@ -12,8 +12,8 @@ module ApplicationHelper
   end
   
   def localize_if_date(string)
-    if string.is_a?(Date)
-      l(string)
+    if string.is_a?(Date) or string.is_a?(DateTime)
+      l(string.to_date)
     else
       string
     end
