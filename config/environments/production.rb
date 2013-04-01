@@ -67,15 +67,7 @@ JunePhotoSharing::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   
-  config.action_mailer.smtp_settings = {
-      :port =>           '587',
-      :address =>        'smtp.mandrillapp.com',
-      :user_name =>      ENV['MANDRILL_USERNAME'],
-      :password =>       ENV['MANDRILL_APIKEY'],
-      :domain =>         'heroku.com',
-      :authentication => :plain
-  }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :sendmail
   
-  config.action_mailer.default_url_options = { :host => 'june-photo-sharing.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'server.maxschulze.com' }
 end
