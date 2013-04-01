@@ -21,6 +21,8 @@ Given(/^(\d+) photos exist$/) do |count|
   count.to_i.times do
     @photos << create(:photo)
   end
+  
+  @photo_count = Photo.count
 end
 
 Then(/^I should see an overview of photos$/) do
@@ -56,4 +58,8 @@ end
 Then(/^I should see the second photo$/) do
   @photos = Photo.overview.all
   page.should have_css("ul.thumbnails li[data-photo-id=\"#{@photos.second.id}\"]")
+end
+
+Then(/^the photo should be deleted$/) do
+  Photo.count.should == @photo_count - 1
 end
