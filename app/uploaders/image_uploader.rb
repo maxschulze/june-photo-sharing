@@ -3,8 +3,8 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  include CarrierWave::RMagick
+  # include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -25,7 +25,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :resize_to_fit => [2560, 1440]
+  # process :resize_to_fit => [2560, 1440]
+  process :fix_exif_rotation
   #
   # def scale(width, height)
   #   # do something
@@ -51,5 +52,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def get_exif(name)
+    manipulate! do |img|
+      return img["EXIF:" + name]
+    end
+  end
 
 end
