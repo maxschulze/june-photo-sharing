@@ -7,19 +7,37 @@
    
   <div class="span3">
     <div class="well">
+      <% if @photo.title.present? %>
+        <h3><%= @photo.title %></h3>
+      <% end %>
       
-      <p>
-        <% if can? :manage, Photo %>
-    			<%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
+      <% if @photo.description.present? %>
+        <p>
+          <%= @photo.description %>
+        </p>
+      <% end %>
+      
+      <hr>
+      
+      <dl class="dl-horizontal">
+        <% %w{ taken_at }.each do |attr| %>
+          <dt><%= Photo.human_attribute_name(attr) %></dt>
+          <dd><%= localize_if_date(@photo.public_send(attr)) %></dd>
         <% end %>
-      </p>
+      </dl>
       
-      <%= simple_form_for @photo do |f| -%>
-        <%= f.input :title %>
-        <%= f.input :taken_at, as: :date_picker %>
+      <% if can? :manage, Photo %>
+        <hr>
+      
+        <%= simple_form_for @photo do |f| -%>
+          <%= f.input :title %>
+          <%= f.input :taken_at, as: :date_picker %>
+          <%= f.input :description, input_html: { :class => 'expandable' } %>
         
-        <%= f.button :submit %>
-      <% end -%>
+          <%= f.button :submit %>
+          <%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
+        <% end -%>
+      <% end %>
     
     </div>
   </div>
