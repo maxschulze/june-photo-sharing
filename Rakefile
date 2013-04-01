@@ -5,3 +5,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 JunePhotoSharing::Application.load_tasks
+
+task :default => ["db:test:load", "db:test:prepare", "spec"]
