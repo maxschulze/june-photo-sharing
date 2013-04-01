@@ -18,15 +18,12 @@ gem 'cancan'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'carrierwave'
-gem 'mini_magick'
-gem "fog"
+gem 'rmagick'
 
 gem 'newrelic_rpm'
 
 gem 'kaminari'
 gem 'kaminari-bootstrap'
-
-gem 'exifr'
 
 gem 'capistrano'
 
