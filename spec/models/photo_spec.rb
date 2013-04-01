@@ -14,16 +14,12 @@ describe Photo do
   end
   
   describe "Upload Image" do
-    it "should upload a new image" do
-      Fog.mock!
-      
+    it "should upload a new image" do  
       lambda { @photo = create(:photo) }.should_not raise_error
       @photo.image.should be_present
     end
     
     it "should store the date and time when the photo was taken" do
-      Fog.mock!
-      
       @photo = create(:exif_photo)
       @photo.taken_at.should be_present
     end
