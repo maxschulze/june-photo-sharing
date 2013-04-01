@@ -63,3 +63,16 @@ end
 Then(/^the photo should be deleted$/) do
   Photo.count.should == @photo_count - 1
 end
+
+Then(/^I should see the edit form$/) do
+  page.should have_css('form.edit_photo')
+end
+
+When(/^I fill in a new date when the photo was taken$/) do
+  @photo_taken_at = 3.weeks.ago
+  fill_in 'photo_taken_at', with: @photo_taken_at
+end
+
+Then(/^I should see when the photo was taken$/) do
+  page.should have_content(I18n.l(@photo_taken_at, :format => :short))
+end
