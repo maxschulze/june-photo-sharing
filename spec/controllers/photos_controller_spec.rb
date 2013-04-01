@@ -39,6 +39,30 @@ describe PhotosController do
     
   end
   
+  describe "PUT /photos/:id" do
+    before do
+      @photo = create(:photo)
+    end
+    
+    it "should update the photo with the new attributes" do
+      put :update, :id => @photo.to_param, :photo => { title: 'new-title', taken_at: '01/01/2012' }
+      
+      response.should redirect_to(photo_path(@photo))
+      updated = assigns(:photo)
+      updated.title.should == 'new-title'
+      updated.taken_at.to_date.should == Date.new(2012, 1, 1)
+    end
+    
+    it "should render the show view if an error has happened" do
+      Photo.any_instance.stub(:valid?).and_return(false)
+      
+      put :update, :id => @photo.to_param, :photo => { title: '' }
+      
+      response.should render_template('photos/show')
+      assigns(:photo).should_not be_valid
+    end
+  end
+  
   describe "DELETE /photos/:id" do
     it "should delete a photo" do
       @photo = create :photo

@@ -63,3 +63,26 @@ end
 Then(/^the photo should be deleted$/) do
   Photo.count.should == @photo_count - 1
 end
+
+Then(/^I should see the edit form$/) do
+  page.should have_css('form.edit_photo')
+end
+
+When(/^I fill in a new date when the photo was taken$/) do
+  @photo_taken_at = 3.weeks.ago.to_date
+  fill_in 'photo_taken_at', with: @photo_taken_at.to_s
+end
+
+Then(/^I should see when the photo was taken$/) do
+  page.should have_content(I18n.l(@photo_taken_at.to_date))
+end
+
+When(/^I fill in a "(.*?)" for the photo$/) do |field_name|
+  @updated_fields ||= {}
+  @updated_fields[field_name] = "random string #{field_name}"
+  fill_in "photo_#{field_name}", with: @updated_fields[field_name]
+end
+
+Then(/^I should see the photo "(.*?)"$/) do |field_name|
+  page.should have_content(@updated_fields[field_name])
+end
