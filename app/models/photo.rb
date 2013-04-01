@@ -1,5 +1,3 @@
-require 'exifr'
-
 class Photo < ActiveRecord::Base
   attr_accessible :description, :title, :user_id, :image
 
