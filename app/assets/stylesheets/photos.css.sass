@@ -1,5 +1,14 @@
-// Place all the styles related to the photos controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .first-in-row 
-	margin-left: 0 !important
+  margin-left: 0 !important
+  
+@media (min-width: 767px)
+  .span3
+    form.edit_photo
+      input.string, textarea
+        width: 90%
+    dl
+      dt
+        width: 40%
+        text-align: left
+      dd
+        margin-left: 45%
