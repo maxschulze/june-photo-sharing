@@ -34,3 +34,9 @@ $(document).ready ->
   
   $('input[data-behaviour="datepicker"]').datepicker()
     
+  $('textarea.expandable').bind 'keyup', ->
+    console.log 'up'
+    $(this).css height: 0
+    $(this).css
+      overflow: 'hidden'
+      height: @.scrollHeight
