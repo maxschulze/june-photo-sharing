@@ -10,5 +10,13 @@ module ApplicationHelper
       link_to name, url, options
     end
   end
+  
+  def localize_if_date(string)
+    if string.is_a?(Date)
+      l(string)
+    else
+      string
+    end
+  end
 
 end
