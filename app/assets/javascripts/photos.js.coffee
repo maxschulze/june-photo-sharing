@@ -31,3 +31,6 @@ $(document).ready ->
   # Fix the margins when potentally the floating changed
   $(window).resize fixThumbnailMargins
   fixThumbnailMargins()
+  
+  $('input[data-behaviour="datepicker"]').datepicker()
+    
