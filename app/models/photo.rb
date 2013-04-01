@@ -5,9 +5,9 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  scope :overview,  order('taken_at desc')
-  scope :previous,  lambda {|current| where('taken_at > ?', current.taken_at) }
-  scope :next,      lambda {|current| where('taken_at < ?', current.taken_at) }
+  scope :overview,  order('taken_at asc')
+  scope :previous,  lambda {|current| where('taken_at < ?', current.taken_at) }
+  scope :next,      lambda {|current| where('taken_at > ?', current.taken_at) }
   
   after_create :extract_taken_at
   

@@ -33,8 +33,8 @@ describe PhotosController do
       pp @photos
       response.should be_success
       
-      assigns[:prev].id.should == @photos.first.id
-      assigns[:next].id.should == @photos.last.id
+      assigns[:prev].id.should == @photos[0].id
+      assigns[:next].id.should == @photos[2].id
     end
     
   end
