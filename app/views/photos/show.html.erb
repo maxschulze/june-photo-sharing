@@ -7,11 +7,13 @@
    
   <div class="span3">
     <div class="well">
-    
-      <% if can? :manage, Photo %>
-  			<%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
-      <% end %>
-    
+      
+      <p>
+        <% if can? :manage, Photo %>
+    			<%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
+        <% end %>
+      </p>
+      
       <%= simple_form_for @photo do |f| -%>
         <%= f.input :title %>
         <%= f.input :taken_at, as: :date_picker %>
