@@ -20,7 +20,11 @@ class Photo < ActiveRecord::Base
   def extract_taken_at
     return if self.taken_at.present?
     
-    if date_taken = image.get_exif("DateTimeOriginal")
+    date_taken = image.get_exif("Create Date")
+    date_taken ||= image.get_exif("Date/Time Original")
+    date_taken ||= image.get_exif("DateTimeOriginal")
+    
+    if date_taken.present?
       Rails.logger.fatal "Image was taken at #{date_taken}"
       
       date_pieces = date_taken.scan(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/).first
