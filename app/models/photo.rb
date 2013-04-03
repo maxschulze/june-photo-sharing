@@ -11,6 +11,10 @@ class Photo < ActiveRecord::Base
   
   after_create :extract_taken_at
   
+  def author_name
+    user.full_name
+  end
+  
   private
   
   def extract_taken_at
