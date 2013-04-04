@@ -25,6 +25,7 @@ class Photo < ActiveRecord::Base
       photo = Photo.new({
         title: payload.subject
       })
+      photo.user = payload.sender
       
       begin
         file = Tempfile.new('email_upload')
