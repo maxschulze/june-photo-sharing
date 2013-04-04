@@ -7,9 +7,9 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   
-  scope :overview,  order('taken_at desc')
-  scope :previous,  lambda {|current| where('taken_at > ?', current.taken_at) }
-  scope :next,      lambda {|current| where('taken_at < ?', current.taken_at) }
+  scope :overview,  order('taken_at asc')
+  scope :previous,  lambda {|current| where('taken_at < ?', current.taken_at) }
+  scope :next,      lambda {|current| where('taken_at > ?', current.taken_at) }
   
   after_create :extract_taken_at
   
@@ -29,13 +29,23 @@ class Photo < ActiveRecord::Base
     true
   end
   
+  def author_name
+    user.full_name
+  end
+  
   private
   
   def extract_taken_at
     return if self.taken_at.present?
     return if image.blank?
     
-    if date_taken = image.get_exif("DateTimeOriginal")
+    date_taken = image.get_exif("Create Date")
+    date_taken ||= image.get_exif("Date/Time Original")
+    date_taken ||= image.get_exif("DateTimeOriginal")
+    
+    if date_taken.present?
+      Rails.logger.fatal "Image was taken at #{date_taken}"
+      
       date_pieces = date_taken.scan(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/).first
       self.taken_at = 
         "#{date_pieces[0]}-#{date_pieces[1]}-#{date_pieces[2]} #{date_pieces[3]}:#{date_pieces[4]}:#{date_pieces[5]}"
