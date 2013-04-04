@@ -40,6 +40,8 @@ class PhotosController < ApplicationController
   
   def upload_from_email
     logger.fatal params[:mandrill_events]
+    
+    head :ok
   end
   
   def destroy
