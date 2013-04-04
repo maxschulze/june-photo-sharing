@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!, :except => [:upload_from_email]
+  before_filter :authenticate_user!
   load_and_authorize_resource
   skip_load_and_authorize_resource :only => [:upload_from_email, :upload]
 
