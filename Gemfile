@@ -27,6 +27,9 @@ gem 'kaminari-bootstrap'
 
 gem 'capistrano'
 
+# E-Mail Processing
+gem 'mandrill-rails'
+
 # CI
 gem 'rake'
 
