@@ -24,4 +24,17 @@ describe Photo do
       @photo.taken_at.should be_present
     end
   end
+  
+  describe "Upload from email" do
+    it "should create a new photo from a payload with attachments and user" do
+      @payload = eval File.read(Rails.root.join('spec', 'fixtures', 'mandrill_payload.txt'))
+      @payload = Mandrill::WebHook::EventDecorator[@payload]
+      
+      @user = create(:user, :email => "from@example.com")
+      
+      expect {
+        Photo.create_from_inbound_mail(@payload).should be_true
+      }.to change(Photo, :count).by(1)
+    end
+  end
 end

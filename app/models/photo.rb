@@ -1,3 +1,5 @@
+require 'mandrill/webhook/event_decorator'
+
 class Photo < ActiveRecord::Base
   attr_accessible :description, :title, :user_id, :image, :taken_at
 
@@ -11,10 +13,27 @@ class Photo < ActiveRecord::Base
   
   after_create :extract_taken_at
   
+  def self.create_from_inbound_mail(payload)
+    # security check
+    return false if payload.sender.blank?
+    
+    payload.attachments.each do |attachment|
+      photo = Photo.new({
+        title: payload.subject
+      })
+      
+      photo.image = attachment.decoded_content
+      photo.save!
+    end
+    
+    true
+  end
+  
   private
   
   def extract_taken_at
     return if self.taken_at.present?
+    return if image.blank?
     
     if date_taken = image.get_exif("DateTimeOriginal")
       date_pieces = date_taken.scan(/(\d{4}):(\d{2}):(\d{2}) (\d{2}):(\d{2}):(\d{2})/).first

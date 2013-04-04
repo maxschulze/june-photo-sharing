@@ -7,7 +7,7 @@ JunePhotoSharing::Application.routes.draw do
     end
   end
   
-  match 'upload_from_email' => "photos#upload_from_email"
+  resource :inbox, :controller => 'inbox', :only => [:show, :create]
 
   root :to => "home#index"
 end
