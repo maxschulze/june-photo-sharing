@@ -18,12 +18,22 @@ class Photo < ActiveRecord::Base
     return false if payload.sender.blank?
     
     payload.attachments.each do |attachment|
+      next unless attachment.content.present? and attachment.type =~ /image/
+      
       photo = Photo.new({
         title: payload.subject
       })
       
-      photo.image = attachment.decoded_content
-      photo.save!
+      begin
+        file = Tempfile.new('email_upload')
+        file.write attachment.decoded_content
+        file.rewind
+        photo.image = file
+        photo.save!
+      ensure
+        file.close
+        file.unlink
+      end
     end
     
     true
