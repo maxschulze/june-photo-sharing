@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:upload_from_email]
   load_and_authorize_resource
 
   def show
@@ -36,6 +36,10 @@ class PhotosController < ApplicationController
     end
 
     render json: { :files => @response }
+  end
+  
+  def upload_from_email
+    logger.fatal params[:mandrill_events]
   end
   
   def destroy
