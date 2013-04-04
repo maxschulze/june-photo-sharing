@@ -20,7 +20,7 @@
       <hr>
       
       <dl class="dl-horizontal">
-        <% %w{ taken_at }.each do |attr| %>
+        <% %w{ taken_at author_name }.each do |attr| %>
           <dt><%= Photo.human_attribute_name(attr) %></dt>
           <dd><%= localize_if_date(@photo.public_send(attr)) %></dd>
         <% end %>

@@ -1,9 +1,10 @@
 class PhotosController < ApplicationController
   before_filter :authenticate_user!
   load_and_authorize_resource
+  skip_load_and_authorize_resource :only => [:upload_from_email, :upload]
 
   def show
-    @prev = Photo.overview.previous(@photo).first
+    @prev = Photo.overview.previous(@photo).last
     @next = Photo.overview.next(@photo).first
   end
 
@@ -36,6 +37,12 @@ class PhotosController < ApplicationController
     end
 
     render json: { :files => @response }
+  end
+  
+  def upload_from_email
+    logger.fatal params[:mandrill_events]
+    
+    head :ok
   end
   
   def destroy
