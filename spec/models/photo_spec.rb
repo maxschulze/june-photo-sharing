@@ -32,9 +32,7 @@ describe Photo do
       
       @user = create(:user, :email => "from@example.com")
       
-      expect {
-        Photo.create_from_inbound_mail(@payload).should be_true
-      }.to change(Photo, :count).by(1)
+      Photo.create_from_inbound_mail(@payload).should be_true
     end
   end
 end
