@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'mandrill/webhook/event_decorator'
 
 class Photo < ActiveRecord::Base
@@ -26,7 +28,7 @@ class Photo < ActiveRecord::Base
       
       begin
         file = Tempfile.new('email_upload')
-        file.write attachment.decoded_content
+        file.write attachment.decoded_content.force_encoding('UTF-8')
         file.rewind
         photo.image = file
         photo.save!
