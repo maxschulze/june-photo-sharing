@@ -28,9 +28,17 @@ class Photo < ActiveRecord::Base
       
       begin
         file = Tempfile.new('email_upload')
-        file.write attachment.decoded_content.force_encoding('UTF-8')
+        file.binmode
+        file.write attachment.decoded_content
         file.rewind
-        photo.image = file
+        
+        uploaded_file = ActionDispatch::Http::UploadedFile.new(
+          :tempfile => file, 
+          :filename => attachment.name, 
+          :original_filename => attachment.name
+        )
+        
+        photo.image = uploaded_file
         photo.save!
       ensure
         file.close
