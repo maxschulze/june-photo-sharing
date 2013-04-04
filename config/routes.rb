@@ -6,6 +6,8 @@ JunePhotoSharing::Application.routes.draw do
       post :upload
     end
   end
+  
+  match 'upload_from_email' => "photos#upload_from_email"
 
   root :to => "home#index"
 end
