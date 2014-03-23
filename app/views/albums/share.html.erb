@@ -1,14 +1,26 @@
-<div class="row-fluid">
-  <div class="span12">
-    <h2>Share Album</h2>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Share Album</h3>
+      </div>
 
-    <p>
-      You can share the album with the link below or invite people directly.<br>
-      Invited people will receive an email with a unique secure link to the album.
-    </p>
+      <div class="panel-body">
+        <div class="row">
+          <p class="col-md-8">
+            You can share the album with the link below or invite people directly.<br>
+            Invited people will receive an email with a unique secure link to the album.
+          </p>
 
-    <p class="lead">
-      <%= album_url(@album) %>
-    </p>
+          <p class="lead col-md-12">
+            <%= album_url(@album) %>
+          </p>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <%= link_to '« Back', @album, class: 'btn-default btn' %>
+      </div>
+    </div>
   </div>
 </div>

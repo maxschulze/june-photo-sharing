@@ -3,6 +3,7 @@ JunePhotoSharing::Application.configure do
 
   # Code is not reloaded between requests
   config.cache_classes = true
+  config.eager_load = true
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -19,7 +20,7 @@ JunePhotoSharing::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
-  
+
   config.assets.initialize_on_precompile = false
 
   # Defaults to nil and saved in location specified by config.assets.prefix
@@ -63,10 +64,6 @@ JunePhotoSharing::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  # Log the query plan for queries taking more than this (works
-  # with SQLite, MySQL, and PostgreSQL)
-  # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  
   config.action_mailer.smtp_settings = {
       :port =>           '587',
       :address =>        'smtp.mandrillapp.com',
@@ -75,6 +72,6 @@ JunePhotoSharing::Application.configure do
       :authentication => :plain
   }
   config.action_mailer.delivery_method = :smtp
-  
+
   config.action_mailer.default_url_options = { :host => 'server.maxschulze.com' }
 end

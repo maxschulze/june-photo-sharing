@@ -13,9 +13,9 @@ $(document).ready ->
 	Recall the function when the floating of the elements changed.
   ###
   fixThumbnailMargins = ->
-    return if $(".row-fluid .thumbnails").length == 0
+    return if $(".home .thumbnails.albums").length == 0
 
-    $(".row-fluid .thumbnails").each ->
+    $(".home .thumbnails.albums").each ->
       $thumbnails = $(this).children()
 
       if $thumbnails.length > 0

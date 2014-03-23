@@ -1,6 +1,6 @@
-<div class="row-fluid">
+<div class="row">
 
-  <div class="span12">
+  <div class="col-md-12">
     <form id="fileupload" action="<%= @form_action %>" method="POST" enctype="multipart/form-data">
       <!-- Redirect browsers with JavaScript disabled to the origin page -->
       <noscript><input type="hidden" name="redirect" value="<%= root_path %>"></noscript>
@@ -10,7 +10,7 @@
         <div class="span8">
           <!-- The fileinput-button span is used to style the file input field as button -->
           <% if @album.present? %>
-            <%= link_to '« Back to Album', @album, class: 'btn' %>
+            <%= link_to '« Back to Album', @album, class: 'btn btn-default' %>
           <% end %>
 
           <span class="btn btn-success fileinput-button">

@@ -1,4 +1,5 @@
-<li class="span2" data-album-id="<%= album.id %>">
+<div class="<%= local_assigns[:col_width] ? col_width : "col-lg-2 col-xs-6 col-sm-4 col-md-3" %>"
+     data-album-id="<%= album.id %>">
   <div class="thumbnail">
     <%= link_to [album].compact do %>
       <img src="<%= album.cover %>" alt="<%= album.name %>" class="img-circle"/>
@@ -8,4 +9,4 @@
       <h4><%= link_to album.name.presence || 'Untitled', album, class: "#{'muted' if album.name.blank?}" %></h4>
     </div>
   </div>
-</li>
+</div>

@@ -1,6 +1,7 @@
 class AlbumsController < ApplicationController
   before_filter :authenticate_user!, except: [:show]
-  load_and_authorize_resource
+  before_filter :load_album, only: [:show, :edit, :update, :destroy, :share]
+  authorize_resource
   skip_load_and_authorize_resource :only => [:show]
 
   # GET /albums
@@ -17,8 +18,6 @@ class AlbumsController < ApplicationController
   # GET /albums/1
   # GET /albums/1.json
   def show
-    @album = Album.find(params[:id])
-
     authenticate_user! unless @album.public
 
     @photos = @album.photos.overview.page(params[:page]).per(params[:per_page] || 50)
@@ -93,6 +92,12 @@ class AlbumsController < ApplicationController
       format.html { render }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def load_album
+    @album ||= Album.friendly.find(params[:id])
   end
 
 end

@@ -1,0 +1,10 @@
+<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), 
+                        html: { :method => :post }) do |f| %>
+      <%= devise_error_messages! %>
+      
+      <%= field_set_tag do %>
+        <%= f.input :email, :autofocus => true %>
+
+        <%= f.button :submit, t('users.unlock.submit'), class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>

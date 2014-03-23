@@ -1,9 +1,9 @@
 module ApplicationHelper
 
   def breadcrumbs(&block)
-    content_tag(:div, class: 'row-fluid breadcrumbs') do
-      content_tag(:div, class: 'span12') do
-        content_tag(:ul, class: 'breadcrumb') do
+    content_tag(:div, class: 'row') do
+      content_tag(:div, class: 'col-md-12') do
+        content_tag(:ol, class: 'breadcrumb') do
           block.call
         end
       end
@@ -17,19 +17,25 @@ module ApplicationHelper
       content_tag(:li, title, class: 'active')
     else
       content_tag(:li) do
-        [ link_to(title, path), content_tag(:span, '/', class: 'divider') ].join(" ").html_safe
+        link_to(title, path)
       end
     end
   end
 
-  def nav_link(name, options = {})
-    url = options.delete(:url)
-    controller = options.delete(:controller)
+  def nav_link(name, target)
+    content_tag(:li, class: "#{'active' if current_page?(target)}") do
+      link_to t(name), target
+    end
+  end
 
-    klasses = ''
-    klasses << " active" if request.path == url or (controller.present? and controller_name == controller)
-    content_tag(:li, class: klasses) do
-      link_to name, url, options
+  def flash_css_class(type)
+    case type.to_sym
+    when :success, :notice
+      'success'
+    when :error, :alert
+      'warning'
+    else
+      'info'
     end
   end
 

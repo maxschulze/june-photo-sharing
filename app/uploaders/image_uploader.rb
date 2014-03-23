@@ -1,12 +1,10 @@
 # encoding: utf-8
 
-require 'carrierwave/rmagick'
-
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  # include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
   # include Sprockets::Helpers::RailsHelper
@@ -28,7 +26,14 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process :resize_to_fit => [2560, 1440]
-  process :fix_exif_rotation
+  process :auto_orient # this should go before all other "process" steps
+
+  def auto_orient
+    manipulate! do |image|
+      image.tap(&:auto_orient)
+    end
+  end
+
   #
   # def scale(width, height)
   #   # do something

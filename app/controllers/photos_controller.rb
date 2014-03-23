@@ -10,7 +10,7 @@ class PhotosController < ApplicationController
 
     if @album.present? && !@album.public
       authenticate_user!
-      load_and_authorize_resource
+      authorize!('show', @photo)
     else
       @photo = @scoped.find(params[:id])
     end
@@ -21,13 +21,13 @@ class PhotosController < ApplicationController
 
   def load_album
     if params[:album_id].present?
-      @album = Album.find(params[:album_id])
+      @album = Album.friendly.find(params[:album_id])
       @scoped = @album.photos
     end
   end
 
   def new
-    @album          = Album.find(params[:album_id]) if params[:album_id].present?
+    @album          = Album.friendly.find(params[:album_id]) if params[:album_id].present?
     @form_action    = @album.present? ? upload_album_photos_path(@album) : upload_photos_path
   end
 
@@ -43,16 +43,18 @@ class PhotosController < ApplicationController
 
   def upload
     @response = []
+    @album = Album.friendly.find(params[:album_id])
 
     if params[:files].present?
       params[:files].each do |file|
-        photo = current_user.photos.create!(image: file, album_id: params[:album_id])
+        photo = current_user.photos.create!(image: file, album_id: @album.id)
+        url   = @album.present? ? album_photo_path(@album, photo) : photo_path(photo)
         @response << {
           name: file.original_filename,
           size: File.size(file.path),
-          url: photo.image.url,
+          url: url,
           thumbnail_url: photo.image.thumb.url,
-          delete_url: photo_path(photo),
+          delete_url: url,
           delete_type: "DELETE"
         }
       end

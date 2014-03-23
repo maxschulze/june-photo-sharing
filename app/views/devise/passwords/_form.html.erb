@@ -1,0 +1,10 @@
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), 
+                        html: { :method => :post }) do |f| %>
+      <%= devise_error_messages! %>
+      
+      <%= field_set_tag do %>
+        <%= f.input :email, :autofocus => true %>
+
+        <%= f.button :submit, t('users.forgot_password.submit'), class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>

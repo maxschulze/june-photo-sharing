@@ -1,25 +1,20 @@
-<div class="row-fluid">
-  <div class="span2">
+<div class="row">
+  <div class="col-md-2">
     <%= render "devise/shared/links" %>
   </div>
 
-  <div class="span10">
-    <h1><%= t('users.sign_up.title') %></h1>
+  <div class="col-md-10">
+    <div class="panel panel-primary">
 
-    <p class="lead"><%= t('users.sign_up.intro') %></p>
-    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { :class => 'form-horizontal' }) do |f| %>
-      <%= devise_error_messages! %>
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= t('users.sign_up.title') %></h3>
+      </div>
 
-      <%= field_set_tag do %>
-        <%= f.input :email, :autofocus => true %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :password %>
-        <%= f.input :password_confirmation %>
+      <div class="panel-body">
+        <p class="lead"><%= t('users.sign_up.intro') %></p>
 
-        <%= f.button :submit, t('users.sign_up.submit') %>
-      <% end %>
-    <% end %>
-
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
 </div>

@@ -10,9 +10,9 @@ class Photo < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  scope :overview,  order('taken_at asc')
-  scope :previous,  lambda {|current| where('taken_at < ?', current.taken_at) }
-  scope :next,      lambda {|current| where('taken_at > ?', current.taken_at) }
+  scope :overview,  -> { order('taken_at asc') }
+  scope :previous,  lambda { |current| where('taken_at < ?', current.taken_at) }
+  scope :next,      lambda { |current| where('taken_at > ?', current.taken_at) }
 
   after_create :extract_taken_at
 
@@ -52,10 +52,16 @@ class Photo < ActiveRecord::Base
   end
 
   def taken_at=(date)
-    logger.fatal "Date #{date}"
-    splitted_date = date.split("/")
-    date = "#{splitted_date.last}/#{splitted_date.first}/#{splitted_date[1]}"
-    write_attribute :taken_at, Date.parse(date)
+    if date.is_a?(String) && date =~ /[\/]{2}/
+      logger.fatal "Fixing date"
+      logger.fatal "Date #{date}"
+      splitted_date = date.split("/")
+      date = "#{splitted_date.last}/#{splitted_date.first}/#{splitted_date[1]}"
+      write_attribute :taken_at, Date.parse(date)
+    else
+      logger.fatal "Writing date"
+      write_attribute :taken_at, date
+    end
   end
 
   def author_name

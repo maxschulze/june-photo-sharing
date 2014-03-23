@@ -1,25 +1,20 @@
-<div class="row-fluid">
-  <div class="span2">
+<div class="row">
+  <div class="col-md-2">
     <%= render "devise/shared/links" %>
   </div>
-  
-  <div class="span10">
-    <h1><%= t('users.sign_in.title') %></h1>
-    
-    <p class="lead"><%= t('users.sign_in.intro') %></p>
 
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { :class => 'form-horizontal' }) do |f| %>
-      <%= field_set_tag do %>
-        <%= f.input :email, :autofocus => true %>
-        <%= f.input :password %>
+  <div class="col-md-10">
+    <div class="panel panel-primary">
 
-        <% if devise_mapping.rememberable? -%>
-          <%= f.input :remember_me, :as => :boolean %>
-        <% end -%>
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= t('users.sign_in.title') %></h3>
+      </div>
 
-        <%= f.button :submit, t('users.sign_in.submit') %>
-      <% end %>
-    <% end %>
-    
+      <div class="panel-body">
+        <p class="lead"><%= t('users.sign_in.intro') %></p>
+
+        <%= render 'form' %>
+      </div>
+    </div>
   </div>
 </div>

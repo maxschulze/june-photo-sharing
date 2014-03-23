@@ -1,14 +1,26 @@
 .arrows
   margin-bottom: 15px
 
-@media (min-width: 767px)
-  .span3
-    form.edit_photo
-      input.string, textarea
-        width: 90%
+.photo
+  .sidebar
+    h3
+      margin-top: 0px
+    .albums .thumbnail
+      text-align: center
+      background-color: transparent
+      margin-bottom: 0px
     dl
-      dt
-        width: 40%
-        text-align: left
-      dd
-        margin-left: 45%
+      margin-top: 0px
+
+@media (min-width: 767px)
+  .photo
+    .sidebar
+      form.edit_photo
+        textarea
+          min-height: 40px
+      dl
+        dt
+          width: 40%
+          text-align: left
+        dd
+          margin-left: 45%

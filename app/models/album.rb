@@ -4,7 +4,7 @@ class Album < ActiveRecord::Base
   belongs_to :user
   has_many :photos
 
-  scope :overview,  order('created_at asc')
+  scope :overview, -> { order('created_at asc') }
 
   validates :user, :name, presence: true
 
