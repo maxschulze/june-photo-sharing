@@ -11,6 +11,6 @@ class CreateAlbums < ActiveRecord::Migration
 
     add_index :albums, :user_id
     add_index :albums, :public
-    add_index :albums, :slug, :unique: true
+    add_index :albums, :slug, unique: true
   end
 end

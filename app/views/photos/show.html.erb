@@ -35,9 +35,10 @@
       <% if user_signed_in? && can?(:manage, Photo) %>
         <hr>
 
-        <%= simple_form_for @photo do |f| -%>
+        <%= simple_form_for [@album, @photo].compact do |f| -%>
           <%= f.input :title %>
           <%= f.input :taken_at, as: :date_picker %>
+          <%= f.input :album_id, collection: Album.all %>
           <%= f.input :description, input_html: { :class => 'expandable' } %>
 
           <%= f.button :submit %>

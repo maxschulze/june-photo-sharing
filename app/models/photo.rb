@@ -51,6 +51,11 @@ class Photo < ActiveRecord::Base
     true
   end
 
+  def taken_at=(date)
+    logger.fatal "Date #{date}"
+    write_attribute :taken_at, Date.parse(date)
+  end
+
   def author_name
     user.full_name
   end

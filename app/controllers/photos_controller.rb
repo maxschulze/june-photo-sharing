@@ -4,22 +4,26 @@ class PhotosController < ApplicationController
   skip_load_and_authorize_resource :only => [:upload_from_email, :upload, :show]
 
   def show
-    scoped = Photo.scoped
+    @scoped = Photo.scoped
 
-    if params[:album_id].present?
-      @album = Album.find(params[:album_id])
-      scoped = @album.photos
-    end
+    load_album
 
     if @album.present? && !@album.public
       authenticate_user!
       load_and_authorize_resource
     else
-      @photo = scoped.find(params[:id])
+      @photo = @scoped.find(params[:id])
     end
 
-    @prev = scoped.overview.previous(@photo).last
-    @next = scoped.overview.next(@photo).first
+    @prev = @scoped.overview.previous(@photo).last
+    @next = @scoped.overview.next(@photo).first
+  end
+
+  def load_album
+    if params[:album_id].present?
+      @album = Album.find(params[:album_id])
+      @scoped = @album.photos
+    end
   end
 
   def new
@@ -28,8 +32,10 @@ class PhotosController < ApplicationController
   end
 
   def update
+    load_album
+
     if @photo.update_attributes(params[:photo])
-      redirect_to(@photo, :notice => "Photo has been saved successfully.")
+      redirect_to([@album, @photo], :notice => "Photo has been saved successfully.")
     else
       render :action => "show"
     end
