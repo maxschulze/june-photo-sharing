@@ -31,6 +31,7 @@ class AlbumsController < ApplicationController
   # GET /albums/new
   # GET /albums/new.json
   def new
+    @album = Album.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @album }
@@ -77,7 +78,7 @@ class AlbumsController < ApplicationController
     @album.destroy
 
     respond_to do |format|
-      format.html { redirect_to albums_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
   end
