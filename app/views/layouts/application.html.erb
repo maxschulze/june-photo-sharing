@@ -26,32 +26,32 @@
 
         <a class="brand" href="/">June's Photos</a>
 
-        <ul class="nav">
-          <% if user_signed_in? %>
-            <%= nav_link 'Home', url: root_path, controller: 'home' %>
-            <%= nav_link 'People', url: users_path, controller: 'users' if can? :manage, User %>
-            <%= nav_link 'Sign out', url: destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= nav_link 'Sign in', url: new_user_session_path, controller: 'sessions' %>
-          <% end %>
-        </ul>
-
         <!-- Everything you want hidden at 940px or less, place within here -->
-        <!-- <div class="nav-collapse collapse">
-
-        </div> -->
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <% if user_signed_in? %>
+              <%= nav_link 'Home', url: root_path, controller: 'home' %>
+              <%= nav_link 'People', url: users_path, controller: 'users' if can? :manage, User %>
+              <%= nav_link 'Sign out', url: destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= nav_link 'Sign in', url: new_user_session_path, controller: 'sessions' %>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>
 
   <div class="container-fluid">
 
-    <div class="row-fluid">
-      <div class="span12">
-        <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
-        <% if alert %><div class="alert alert-error"><%= alert %></div><% end %>
+    <% if flash.any? %>
+      <div class="row-fluid">
+        <div class="span12">
+          <% if notice %><div class="alert alert-success"><%= notice %></div><% end %>
+          <% if alert %><div class="alert alert-error"><%= alert %></div><% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <%= yield %>
   </div>

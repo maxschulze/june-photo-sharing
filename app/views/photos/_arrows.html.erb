@@ -1,11 +1,11 @@
-<div class="span12">
-  <%= link_to @prev do %>
+<div class="span12 arrows">
+  <%= link_to [@album, @prev].compact, class: 'btn' do %>
   	<i class="icon-arrow-left"></i>
-  	Previous
+  	<span>Previous</span>
   <% end if @prev.present? %>
 
-  <%= link_to @next do %>
-  	Next
+  <%= link_to [@album, @next].compact, class: 'btn' do %>
+  	<span>Next</span>
   	<i class="icon-arrow-right"></i>
   <% end if @next.present? %>
 </div>

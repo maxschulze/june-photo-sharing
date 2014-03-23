@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130401190203) do
+ActiveRecord::Schema.define(:version => 20140323105857) do
+
+  create_table "albums", :force => true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.boolean  "public"
+    t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "albums", ["public"], :name => "index_albums_on_public"
+  add_index "albums", ["slug"], :name => "index_albums_on_slug"
+  add_index "albums", ["user_id"], :name => "index_albums_on_user_id"
 
   create_table "photos", :force => true do |t|
     t.string   "title"
@@ -21,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130401190203) do
     t.datetime "updated_at",  :null => false
     t.string   "image"
     t.datetime "taken_at"
+    t.integer  "album_id"
   end
 
   create_table "users", :force => true do |t|

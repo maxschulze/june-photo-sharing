@@ -1,45 +1,51 @@
+<%= breadcrumbs do %>
+  <%= breadcrumb 'Home', root_path %>
+  <%= breadcrumb @album.name, album_path(@album) if @album.present? %>
+  <%= breadcrumb @photo.title.presence || "Photo ##{@photo.id}", album_photo_path(@album, @photo) %>
+<% end %>
+
 <div class="row-fluid">
-  
+
   <div class="span9 text-center">
     <%= render 'arrows' %>
     <%= render 'image' %>
   </div>
-   
+
   <div class="span3">
     <div class="well">
       <% if @photo.title.present? %>
         <h3><%= @photo.title %></h3>
       <% end %>
-      
+
       <% if @photo.description.present? %>
         <p>
           <%= @photo.description %>
         </p>
       <% end %>
-      
-      <hr>
-      
+
+      <% if @photo.description.present? || @photo.title.present? %><hr><% end %>
+
       <dl class="dl-horizontal">
         <% %w{ taken_at author_name }.each do |attr| %>
           <dt><%= Photo.human_attribute_name(attr) %></dt>
           <dd><%= localize_if_date(@photo.public_send(attr)) %></dd>
         <% end %>
       </dl>
-      
-      <% if can? :manage, Photo %>
+
+      <% if user_signed_in? && can?(:manage, Photo) %>
         <hr>
-      
+
         <%= simple_form_for @photo do |f| -%>
           <%= f.input :title %>
           <%= f.input :taken_at, as: :date_picker %>
           <%= f.input :description, input_html: { :class => 'expandable' } %>
-        
+
           <%= f.button :submit %>
           <%= link_to 'Delete photo', photo_path, method: :delete, confirm: t('confirm'), class: 'btn btn-danger' %>
         <% end -%>
       <% end %>
-    
+
     </div>
   </div>
-  
+
 </div>

@@ -1,0 +1,9 @@
+<li class="span2" data-album-id="<%= album.id %>">
+  <%= link_to [album].compact, class: 'thumbnail' do %>
+    <img src="<%= album.cover %>" alt="<%= album.name %>" class="img-circle"/>
+  <% end if album.photos.present? %>
+
+  <% if album.name.present? %>
+    <h4><%= link_to album.name, album %></h4>
+  <% end %>
+</li>

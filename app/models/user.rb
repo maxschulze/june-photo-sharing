@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :invitations, :class_name => self.to_s, :as => :invited_by
   has_many :photos
+  has_many :albums
 
   validates :first_name, :last_name, :presence => true
 
