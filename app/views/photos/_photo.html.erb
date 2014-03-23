@@ -1,15 +1,13 @@
 <li class="span2" data-photo-id="<%= photo.id %>">
-  <%= link_to [@album, photo].compact, class: 'thumbnail' do %>
-    <img src="<%= photo.image.large_thumb.url %>" class="img-rounded"/>
-  <% end %>
+  <div class="thumbnail">
+    <%= link_to [@album, photo].compact do %>
+      <img src="<%= photo.image.large_thumb.url %>" class="img-rounded"/>
+    <% end %>
 
-  <% if photo.title.present? %>
-    <h4><%= link_to photo.title, photo %></h4>
-  <% end %>
-
-  <% if photo.description.present? %>
-    <p>
-      <%= photo.description %>
-    </p>
-  <% end %>
+    <div class="caption">
+      <h4>
+        <%= link_to photo.title.presence || "Untitled", photo, class: "#{'muted' if photo.title.blank?}" %>
+      </h4>
+    </div>
+  </div>
 </li>

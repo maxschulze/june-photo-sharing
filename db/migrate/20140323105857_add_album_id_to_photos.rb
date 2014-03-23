@@ -4,7 +4,7 @@ class AddAlbumIdToPhotos < ActiveRecord::Migration
 
     add_index :photos, :album_id
 
-    @album = Album.create!(name: 'Old Photos', user: User.first)
+    @album = Album.create!(name: 'Old Photos', user_id: User.first.id)
     Photo.update_all(album_id: @album.id)
   end
 end

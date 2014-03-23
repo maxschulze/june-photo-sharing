@@ -1,9 +1,11 @@
 <li class="span2" data-album-id="<%= album.id %>">
-  <%= link_to [album].compact, class: 'thumbnail' do %>
-    <img src="<%= album.cover %>" alt="<%= album.name %>" class="img-circle"/>
-  <% end if album.photos.present? %>
+  <div class="thumbnail">
+    <%= link_to [album].compact do %>
+      <img src="<%= album.cover %>" alt="<%= album.name %>" class="img-circle"/>
+    <% end if album.photos.present? %>
 
-  <% if album.name.present? %>
-    <h4><%= link_to album.name, album %></h4>
-  <% end %>
+    <div class="caption">
+      <h4><%= link_to album.name.presence || 'Untitled', album, class: "#{'muted' if album.name.blank?}" %></h4>
+    </div>
+  </div>
 </li>
