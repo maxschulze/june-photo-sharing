@@ -8,11 +8,11 @@ class PhotosController < ApplicationController
 
     load_album
 
-    if @album.present? && !@album.public
+    @photo = @scoped.find(params[:id])
+
+    if @album.blank? || (@album.present? && !@album.public)
       authenticate_user!
       authorize!('show', @photo)
-    else
-      @photo = @scoped.find(params[:id])
     end
 
     @prev = @scoped.overview.previous(@photo).last
