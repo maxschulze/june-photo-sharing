@@ -82,4 +82,17 @@ class AlbumsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def share
+    unless @album.public
+      redirect_to @album, notice: 'Album needs to be public in order to be shared.'
+      return
+    end
+
+    respond_to do |format|
+      format.html { render }
+      format.json { head :no_content }
+    end
+  end
+
 end
