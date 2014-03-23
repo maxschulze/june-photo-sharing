@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
 set :application, "june-photo-sharing"
-set :repository,  "git://github.com/maxschulze/june-photo-sharing.git"
+set :repository,  "git@github.com:maxschulze/june-photo-sharing.git"
 set :deploy_via, :remote_cache
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
