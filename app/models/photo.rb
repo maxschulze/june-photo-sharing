@@ -53,6 +53,8 @@ class Photo < ActiveRecord::Base
 
   def taken_at=(date)
     logger.fatal "Date #{date}"
+    splitted_date = date.split("/")
+    date = "#{splitted_date.last}/#{splitted_date.first}/#{splitted_date[1]}"
     write_attribute :taken_at, Date.parse(date)
   end
 
