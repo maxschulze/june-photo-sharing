@@ -15,8 +15,13 @@ class PhotosController < ApplicationController
       authorize!('show', @photo)
     end
 
-    @prev = @scoped.overview.previous(@photo).last
-    @next = @scoped.overview.next(@photo).first
+    order = session[:album_order] = params[:order].presence || session[:album_order].presence || 'taken'
+
+    @scoped = @scoped.
+      public_send("sort_#{order}")
+
+    @prev = @scoped.public_send("#{order}_previous", @photo).last
+    @next = @scoped.public_send("#{order}_next", @photo).first
   end
 
   def load_album
