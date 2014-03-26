@@ -55,4 +55,12 @@ module ApplicationHelper
     album_order().presence == order
   end
 
+  def album_display
+    session[:album_display]
+  end
+
+  def album_display?(display)
+    album_display().presence == display
+  end
+
 end

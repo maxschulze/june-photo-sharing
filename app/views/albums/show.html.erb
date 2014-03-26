@@ -1,52 +1,26 @@
-<%= breadcrumbs do %>
-  <%= breadcrumb 'Home', root_path %>
-  <%= breadcrumb @album.name, album_path(@album) %>
-<% end %>
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="page-header">
-      <h1><%= @album.name %> <small><%= @album.photos.count %> photos</small></h1>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 col-sm-6 col-xs-6">
-    <% if user_signed_in? %>
-      <div class="btn-group">
-        <%= link_to 'Share album', share_album_path(@album), class: 'btn btn-success' if @album.public && can?(:share, Album) %>
-        <%= link_to 'Upload photo', new_album_photo_path(@album), class: 'btn btn-default' if can? :create, Photo %>
-        <%= link_to 'Edit album', edit_album_path(@album), class: 'btn btn-default' if can? :edit, Album %>
-        <%= link_to 'Delete', album_path(@album), method: :delete, confirm: 'Are you sure?',
-              class: 'btn btn-default btn-danger' if can? :delete, Album %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="col-md-6 col-sm-6 col-xs-6 text-right">
-    <div class="btn-group">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        Sort by <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu text-left pull-right" role="menu">
-        <li class="<%= 'active' if album_order?('taken') %>">
-          <%= link_to 'Date Taken <small>(Oldest First)</small>'.html_safe,
-                album_path(@album, order: 'taken') %>
-        </li>
-        <li class="<%= 'active' if album_order?('created') %>">
-          <%= link_to 'Date Uploaded <small>(Newest First)</small>'.html_safe,
-                album_path(@album, order: 'created') %>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<hr>
+<%= render 'header' %>
 
 <div class="row photos">
-  <%= render @photos %>
+  <% if album_display?('list') %>
+    <table class="table table-striped tabled-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Preview</th>
+          <th>Title</th>
+          <th>Taken at</th>
+          <th>Created at</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%= render partial: 'photos/photo_list', collection: @photos %>
+      </tbody>
+    </table>
+  <% else %>
+    <%= render partial: 'photos/photo_grid', collection: @photos %>
+  <% end %>
 </div>
 
 <div class="row">

@@ -1,0 +1,16 @@
+<% photo = photo_list %>
+
+<tr>
+  <td><%= check_box_tag 'select[]', photo.id %></td>
+  <td><%= link_to image_tag(photo.image.thumb.url, alt: photo.title || 'Untitled'), [@album, photo] %></td>
+  <td><%= photo.title || 'Untitled' %></td>
+  <td><%= l photo.taken_at, format: :short %></td>
+  <td><%= l photo.created_at, format: :short %></td>
+  <td>
+    <div class="btn-group btn-sm">
+      <%= link_to 'Edit', [@album, photo].compact, class: 'btn btn-default' %>
+      <%= link_to 'Delete', [@album, photo].compact,
+            method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
+  </td>
+</tr>

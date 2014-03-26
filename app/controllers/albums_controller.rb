@@ -19,7 +19,8 @@ class AlbumsController < ApplicationController
   # GET /albums/1.json
   def show
     authenticate_user! unless @album.public
-    order = session[:album_order] = params[:order].presence || session[:album_order].presence || 'taken'
+    order     = session[:album_order]   = params[:order].presence || session[:album_order].presence || 'taken'
+    @display  = session[:album_display] = params[:display].presence || session[:album_display].presence || 'grid'
 
     @photos = @album.photos.
       public_send("sort_#{order}").

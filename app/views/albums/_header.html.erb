@@ -1,0 +1,57 @@
+<%= breadcrumbs do %>
+  <%= breadcrumb 'Home', root_path %>
+  <%= breadcrumb @album.name, album_path(@album) %>
+<% end %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+      <h1><%= @album.name %> <small><%= @album.photos.count %> photos</small></h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-8">
+    <% if user_signed_in? %>
+      <div class="btn-group">
+        <%= link_to 'Share album', share_album_path(@album), class: 'btn btn-success' if @album.public && can?(:share, Album) %>
+        <%= link_to 'Upload photo', new_album_photo_path(@album), class: 'btn btn-default' if can? :create, Photo %>
+        <%= link_to 'Edit album', edit_album_path(@album), class: 'btn btn-default' if can? :edit, Album %>
+        <%= link_to 'Delete', album_path(@album), method: :delete, confirm: 'Are you sure?',
+              class: 'btn btn-default btn-danger' if can? :delete, Album %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-4 text-right">
+    <div class="btn-group">
+      <a href="<%= album_path(@album, params.merge(display: 'list')) %>"
+         class="btn btn-default <%= 'active' if album_display?('list') %>">
+        <span class="glyphicon glyphicon-th-list"></span>
+      </a>
+
+      <a href="<%= album_path(@album, params.merge(display: 'grid')) %>"
+         class="btn btn-default <%= 'active' if album_display?('grid') %>">
+        <span class="glyphicon glyphicon-th"></span>
+      </a>
+    </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Sort by <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu text-left pull-right" role="menu">
+        <li class="<%= 'active' if album_order?('taken') %>">
+          <%= link_to 'Date Taken <small>(Oldest First)</small>'.html_safe,
+                album_path(@album, params.merge(order: 'taken')) %>
+        </li>
+        <li class="<%= 'active' if album_order?('created') %>">
+          <%= link_to 'Date Uploaded <small>(Newest First)</small>'.html_safe,
+                album_path(@album, params.merge(order: 'created')) %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr>
