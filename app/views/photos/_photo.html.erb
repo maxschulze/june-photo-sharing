@@ -6,7 +6,7 @@
 
     <div class="caption">
       <h4>
-        <%= link_to photo.title.presence || "Untitled", photo, class: "#{'muted' if photo.title.blank?}" %>
+        <%= link_to photo.title.presence || "Untitled", [@album, photo], class: "#{'muted' if photo.title.blank?}" %>
       </h4>
     </div>
   </div>

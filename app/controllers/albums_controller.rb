@@ -19,8 +19,17 @@ class AlbumsController < ApplicationController
   # GET /albums/1.json
   def show
     authenticate_user! unless @album.public
+    scoped = @album.photos
 
-    @photos = @album.photos.overview.page(params[:page]).per(params[:per_page] || 50)
+    if params[:order].present?
+      session[:album_order] = params[:order]
+      scoped = scoped.public_send("sort_#{params[:order]}")
+    else
+      session[:album_order] = 'taken'
+      scoped = scoped.sort_taken
+    end
+
+    @photos = scoped.page(params[:page]).per(params[:per_page] || 50)
 
     respond_to do |format|
       format.html # show.html.erb

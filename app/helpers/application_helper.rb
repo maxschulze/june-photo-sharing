@@ -47,4 +47,12 @@ module ApplicationHelper
     end
   end
 
+  def album_order
+    session[:album_order]
+  end
+
+  def album_order?(order)
+    album_order().presence == order
+  end
+
 end
